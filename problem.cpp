@@ -313,40 +313,44 @@ int Problem::getCost() const {
 //     //Overload this comparison operator to make it so it takes the smallest of the two
 //     return (heuristic+ cost) > (copy.heuristic + copy.cost);
 // }
-
-// // helper function for euclidean algorithm to find the coordinates for a specific num tile
+// possibly not needed, keeping for now just in case
 // pair<int, int> Problem::goalCoordinates(int puzzleNum) {
-//     for (int row = 0; row < 3; row++) {
-//         for (int column = 0; column < 3; column++) {
-//             if(goal[row][column] == puzzleNum) { // returns the goal coordinate for the number provided
-//                 return {row, column};
+//     for (int i = 0; i < totalSize; i++) {
+//      if(goal[i] == puzzleNum) { // returns the goal coordinate for the number provided
+//          return i;
 //             }
 //         }
 //     }
-//     return {-1, -1};   // return if number is not part of the 8-puzzle (not 0-8), 0 will be excluded for
+//     return -1;   // return if number is not part of the 8-puzzle (not 0-8), 0 will be excluded for
 //                         // Euclidean calculation in the actual function
 // }
 
-// //uses Euclidean algorithm for finding heuristic.
-// double Problem::computeEuclideanHeuristic() {
-//     // the function must be double since we are dealing with sqrt and there will be decimals
-//     double totalHueristic = 0.0;
-
-//     for (int currentRow = 0; currentRow < 3; currentRow++) {
-//         for (int currentColumn = 0; currentColumn < 3; currentColumn++) {
-//             // save the numbers from the array in an int in order to use the helper later
-//             int puzzleNum = array[currentRow][currentColumn];
-//             if (puzzleNum != 0) { // exclude the 0 tile
-//             // user helper function to get the goal coordinates for the number in the puzzle
-//                 pair<int, int> correctAllocation = goalCoordinates(puzzleNum);
-//                 // .first gets the x value, .second gets the y 
-//                 int goalRow = correctAllocation.first;
-//                 int goalColumn = correctAllocation.second;
-
-//                 // Euclidean distance formula 
-//                totalHueristic += sqrt(pow(goalRow - currentRow, 2) + pow(goalColumn - currentColumn, 2));
-//             }
-//         }
+// this might be all I need for manhattan
+// // int Problem::manhattanDistanceHeuristic() {
+//     for(int i = 0; i < totalSize; ++i) {
+//         if(state[i] == 1)
+//             return abs(i - 0);
 //     }
-//     return totalHueristic;
+//     return 0;
+// }
+
+// option 2 if the first doesn't work
+// int Problem::computeManhattanHeuristic() {
+//     // the function must be double since we are dealing with sqrt and there will be decimals
+//     int totalHueristic = 0;
+
+// for(int i = 0; i < totalSize; ++i) {
+//         int puzzleNum = state[i];
+//         if(puzzleNum == 0) {
+//             continue;
+//         }
+
+//         int goalIndex = goalCoordinates(puzzleNum);
+//         if(goalIndex == -1) {
+//             continue; // not found, skip
+//         }
+//         totalHeuristic += abs(goalIndex - i);
+//     }
+
+//     return totalHeuristic;
 // }

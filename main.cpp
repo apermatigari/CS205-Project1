@@ -176,25 +176,7 @@ int main() {
 //     priority_queue<Problem> explored; //Sort by cost + heuristic values from least to greatest
 //     //For this problem a priority queue is not needed because you're inserting by cost and the cost only icnreases when the node is expanded 
 //     //so we must expand all ndoes of the same cost before expanding nodes with higher costs
-    
-
-//     Problem UpChoice; //Set problem to the possible choice moves
-//     Problem DownChoice;
-//     Problem LeftChoice;
-//     Problem RightChoice;
 //     Problem tempFrontierFront;
-
-//     bool up, down, left, right = false;
-
-
-//     while(!frontier.empty()){
-//         tempFrontierFront = frontier.top();
-//         frontier.pop();
-//         //Now removing leaf node and getting all possibilties 
-//         UpChoice = tempFrontierFront;
-//         DownChoice = tempFrontierFront;
-//         LeftChoice = tempFrontierFront;
-//         RightChoice = tempFrontierFront;
     
 //         if(tempFrontierFront.isGoal()){
 //             tempFrontierFront.printArray();
@@ -211,32 +193,13 @@ int main() {
 //         explored.push(tempFrontierFront);
 //         cout << "Expanding this node..." << endl;
 //         cout << endl;
-
-//         up = UpChoice.moveUp();
-//         down = DownChoice.moveDown();
-//         left = LeftChoice.moveLeft();
-//         right = RightChoice.moveRight();
-//         //For uniform cost search, the heuristic is always just the depth at which the node is at
-//         //On top of checking if move is valid, must also check if its repeated
-//          if(right) {
-//             if(!withinFrontier(frontier, RightChoice) && !withinExplored(explored, RightChoice)){
-//                 frontier.push(RightChoice);
-//             }
-//         }
-//          if(left) {
-//             if(!withinFrontier(frontier, LeftChoice) && !withinExplored(explored, LeftChoice)){
-//                 frontier.push(LeftChoice);
-//             }
-//         }
-//         if(up) {
-//             if(!withinFrontier(frontier, UpChoice) && !withinExplored(explored, UpChoice)){ //if no duploicate found push into frontier
-//                 frontier.push(UpChoice);
-//             }
-//         }
-//         if(down) {
-//             if(!withinFrontier(frontier, DownChoice) && !withinExplored(explored, DownChoice)){
-//                 frontier.push(DownChoice);
-//             }
+            
+         // vector<Problem> children = tempFrontierFront.getChildren();
+         // for(int i = 0; i < children.size(); ++i) {
+                // children[i].setHeuristic(children[i].numMisplacedTiles());
+//                  if(!withinFrontier(frontier, RightChoice) && !withinExplored(explored, RightChoice)){
+//                  frontier.push(RightChoice);
+//              }
 //         }
 
 //         if(frontier.size() > MAX_FRONTIER) {
@@ -256,25 +219,12 @@ int main() {
 //     prob.setHeuristic(prob.numMisplacedTiles());
 //     frontier.push(prob); //Initialize frontier with inital state
 //     priority_queue<Problem> explored;
-
-//     Problem UpChoice; //Set problem to the possible choice moves
-//     Problem DownChoice;
-//     Problem LeftChoice;
-//     Problem RightChoice;
 //     Problem tempFrontierFront;
-
-//     bool up, down, left, right = false;
-
 
 //     while(!frontier.empty()){
 //         tempFrontierFront = frontier.top();
 //         frontier.pop();
-//         //Now removing leaf node and getting all possibilties 
-//         UpChoice = tempFrontierFront;
-//         DownChoice = tempFrontierFront;
-//         LeftChoice = tempFrontierFront;
-//         RightChoice = tempFrontierFront;
-    
+
 //         if(tempFrontierFront.isGoal()){
 //             tempFrontierFront.printArray();
 //             cout << endl;
@@ -292,39 +242,15 @@ int main() {
 //         cout << "Expanding this node..." << endl;
 //         cout << endl;
 
-//         up = UpChoice.moveUp();
-//         down = DownChoice.moveDown();
-//         left = LeftChoice.moveLeft();
-//         right = RightChoice.moveRight();
-
-//         //Now we get the heuristic by caluclating the number of misplaced tiles of each operator
-//         UpChoice.setHeuristic(UpChoice.numMisplacedTiles());
-//         DownChoice.setHeuristic(DownChoice.numMisplacedTiles());
-//         LeftChoice.setHeuristic(LeftChoice.numMisplacedTiles());
-//         RightChoice.setHeuristic(RightChoice.numMisplacedTiles());
-
 //         //For uniform cost search, the heuristic is always just the depth at which the node is at
 //         //On top of checking if move is valid, must also check if its repeated
-//         if(right) {
-//             if(!withinFrontier(frontier, RightChoice) && !withinExplored(explored, RightChoice)){
-//                 frontier.push(RightChoice);
-//             }
-//         }
-//         if(left) {
-//             if(!withinFrontier(frontier, LeftChoice) && !withinExplored(explored, LeftChoice)){
-//                 frontier.push(LeftChoice);
-//             }
-//         }
-//         if(up) {
-//             if(!withinFrontier(frontier, UpChoice) && !withinExplored(explored, UpChoice)){ //if no duploicate found push into frontier
-//                 frontier.push(UpChoice);
-//             }
-//         }
-//         if(down) {
-//             if(!withinFrontier(frontier, DownChoice) && !withinExplored(explored, DownChoice)){
-//                 frontier.push(DownChoice);
-//             }
-//         }
+          // vector<Problem> children = tempFrontierFront.getChildren();
+          // for(Problem child : children) {
+        //     child.setHeuristic(child.numMisplacedTiles());
+        //     if(!withinFrontier(frontier, child) && !withinExplored(explored, child)) {
+        //         frontier.push(child);
+        //     }
+        // }
 
 //         if(frontier.size() > MAX_FRONTIER) {
 //             MAX_FRONTIER = frontier.size();
@@ -332,34 +258,21 @@ int main() {
 //     }
 // }
 
-// void AstarEuclidian(Problem prob) {
+// void AstarManhattanProblem prob) {
 //     //Impleent A* with Euclidian Distance
 //     // We add initial state to frontier and pop it off and expand it, when expanded we caluclate the heuristic and get its f(n) value
 //     // From there, we insert it into the frontier by priority and continue to pop off and expand again until goal state found
 //     //First we need to initalize a priority queue
 //     priority_queue<Problem> frontier;
-//     prob.setHeuristic(prob.computeEuclideanHeuristic());
+//     prob.setHeuristic(prob.computeManhattanHeuristic());
 //     frontier.push(prob); //Initialize frontier with inital state
 //     priority_queue<Problem> explored;
-
-//     Problem UpChoice; //Set problem to the possible choice moves
-//     Problem DownChoice;
-//     Problem LeftChoice;
-//     Problem RightChoice;
 //     Problem tempFrontierFront;
-
-//     bool up, down, left, right = false;
-
 
 //     while(!frontier.empty()) {
 //         tempFrontierFront = frontier.top();
 //         frontier.pop();
-//         //Now removing leaf node and getting all possibilties 
-//         UpChoice = tempFrontierFront;
-//         DownChoice = tempFrontierFront;
-//         LeftChoice = tempFrontierFront;
-//         RightChoice = tempFrontierFront;
-
+//    
 //         if(tempFrontierFront.isGoal()) {
 //             tempFrontierFront.printArray();
 //             cout << endl;
@@ -376,40 +289,14 @@ int main() {
 //         cout << "Expanding this node..." << endl;
 //         cout << endl;
 
-//         up = UpChoice.moveUp();
-//         down = DownChoice.moveDown();
-//         left = LeftChoice.moveLeft();
-//         right = RightChoice.moveRight();
-
-//         //Now we get the heuristic by caluclating Euclidean distance (sqrt(x2-x1)^2 + (y2-y1)^2)
-//         UpChoice.setHeuristic(UpChoice.computeEuclideanHeuristic()); 
-//         DownChoice.setHeuristic(DownChoice.computeEuclideanHeuristic());
-//         LeftChoice.setHeuristic(LeftChoice.computeEuclideanHeuristic());
-//         RightChoice.setHeuristic(RightChoice.computeEuclideanHeuristic());
-
-
-//         //For uniform cost search, the heuristic is always just the depth at which the node is at
-//         //On top of checking if move is valid, must also check if its repeated
-//         if(right) {
-//             if(!withinFrontier(frontier, RightChoice) && !withinExplored(explored, RightChoice)){
-//                 frontier.push(RightChoice);
-//             }
-//         }
-//         if(left) {
-//             if(!withinFrontier(frontier, LeftChoice) && !withinExplored(explored, LeftChoice)){
-//                 frontier.push(LeftChoice);
-//             }
-//         }
-//         if(up) {
-//             if(!withinFrontier(frontier, UpChoice) && !withinExplored(explored, UpChoice)){ //if no duploicate found push into frontier
-//                 frontier.push(UpChoice);
-//             }
-//         }
-//         if(down) {
-//             if(!withinFrontier(frontier, DownChoice) && !withinExplored(explored, DownChoice)){
-//                 frontier.push(DownChoice);
-//             }
-//         }
+        // vector<Problem> children = tempFrontierFront.getChildren();
+        // for(Problem child : children) {
+        //     // CHANGED: euclidean → manhattan
+        //     child.setHeuristic(child.manhattanDistanceHeuristic());
+        //     if(!withinFrontier(frontier, child) && !withinExplored(explored, child)) {
+        //         frontier.push(child);
+        //     }
+        // }
 
 //         if(frontier.size() > MAX_FRONTIER) {
 //             MAX_FRONTIER = frontier.size();
