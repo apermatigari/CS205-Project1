@@ -9,6 +9,11 @@ class Problem {
         vector<int> state;
         int totalSize;
         void printArray() const;
+        bool moveUp(int pos); 
+        bool moveDown(int recessCellPos); 
+        bool moveLeft(int start, int end); 
+        bool moveRight(int start, int end); 
+        int getCost() const;
     private:
         int numTrenches;
         vector<int> recessPos;

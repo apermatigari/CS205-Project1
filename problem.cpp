@@ -42,6 +42,108 @@ void Problem::printArray() const {
     cout << endl;
 }
 
+bool Problem::moveUp(int pos) {
+    int recessCellPos = -1;
+    for(int i = 0; i < recessPos.size(); ++i) {
+        if(recessPos[i] == pos) {
+            recessCellPos = i;
+            break;
+        }
+    }
+
+    if(recessCellPos == -1) {
+        return false;
+    }
+
+    int recessCell = numTrenches + recessCellPos;
+    if(state[recessCell] != 0) {
+        return false;
+    }
+
+    if(state[pos] == 0) {
+        return false;
+    }
+
+    state[recessCell] = state[pos];
+    state[pos] = 0;
+    ++cost;
+    return true;
+}
+
+bool Problem::moveDown(int recessCellPos) {
+    int recessCell = numTrenches + recessCellPos;
+    int trenchPos = recessPos[recessCellPos];
+
+    if(state[recessCell] == 0) {
+        return false;
+    }
+    
+    if(state[trenchPos] != 0) {
+        return false;
+    }
+
+    state[trenchPos] = state[recessCell];
+    state[recessCell] = 0;
+    ++cost;
+    return true;
+}
+
+bool Problem::moveLeft(int start, int end) {
+    if(end >= start) {
+        return false;
+    }
+    
+    if(state[start] == 0) {
+        return false;
+    }
+    
+    if(state[end] != 0) {
+        return false;
+    }
+   
+    for(int i = end + 1; i < start; ++i) {
+        if(state[i] != 0) {
+            return false;
+        }   
+    }
+
+    int replacedValue = state[start];
+    state[end] = replacedValue;
+    state[start] = 0;
+    ++cost;
+    return true;
+}
+
+bool Problem::moveRight(int start, int end) {
+    if(end <= start) {
+        return false;
+    }
+   
+    if(state[start] == 0) {
+        return false;
+    }
+
+    if(state[end] != 0) {
+        return false;
+    }
+    
+    for(int i = start + 1; i < end; ++i) {
+        if(state[i] != 0) {
+            return false;
+        }
+    }
+
+    int replacedValue = state[start];
+    state[end] = replacedValue;
+    state[start] = 0;
+    ++cost;
+    return true;
+}
+
+int Problem::getCost() const {
+    return cost;
+}
+
 // Problem::Problem() {
 //     //Change the number of rows and columsn needed to account for puzzle size
 //     rows = 3;
